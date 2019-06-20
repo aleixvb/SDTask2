@@ -84,19 +84,7 @@ def master(nmaps):
                               body='permission_granted')
         id_list.remove(chosen_slave)
         slave_req -= 1
-    """
-    for i in range(n_slaves):
-        id_list = []
-        slave_req = 0
-
-        channel.basic_consume(listen_slaves, queue='masters_queue', no_ack=True)
-        channel.start_consuming()
-
-        chosen_slave = random.choice(id_list)
-        channel.basic_publish(exchange='', routing_key='slave'+str(chosen_slave)+'_queue', body='permission_granted')
-        id_list.remove(chosen_slave)
-        n_slaves -= 1
-    """
+    
     channel.queue_delete(queue='masters_queue')
     connection.close()
 
